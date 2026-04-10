@@ -1,0 +1,48 @@
+@import '../shared/reset';
+@import '../shared/variables';
+@import '../shared/container';
+@import '../components/header';
+@import '../components/footer';
+
+body {
+	min-width: 320px;
+	color: $color-primary;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+}
+
+main {
+    flex: 1 0 auto;
+    padding: 40px 0;
+}
+
+footer {
+    flex: 0 0 auto;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.title__h1 {
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: 600;
+}
+
+.title__count {
+    color: #888;
+    font-size: 16px;
+    line-height: 1.2;
+    margin-left: 5px;
+}

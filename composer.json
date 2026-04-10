@@ -1,0 +1,13 @@
+{
+   "autoload": {
+        "psr-4": {
+            "Core\\": "core/",
+            "App\\": "app/",
+            "Database\\": "database/"
+        }
+   },
+    "require": {
+        "smarty/smarty": "^4.3",
+        "scssphp/scssphp": "^2.1"
+   }
+}

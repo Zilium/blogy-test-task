@@ -1,0 +1,18 @@
+.category-page__title {
+    margin-bottom: 30px;
+}
+
+.category-page__description {
+    margin-bottom: 30px; 
+}
+
+.category-page__sort {
+    margin-bottom: 32px;
+}
+
+.category-page__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    row-gap: 40px;
+}

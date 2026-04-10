@@ -1,0 +1,17 @@
+.footer {
+    background-color: $background-primary;
+    color: #fff;
+
+    @media (min-width: 0) {
+        padding: 15px 0;
+    }
+
+    @media (min-width: 768px) {
+        padding: 60px 0;
+    }
+
+    &__copyright {
+        text-align: center;
+        font-weight: 500;
+    }
+}

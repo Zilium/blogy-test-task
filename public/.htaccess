@@ -1,0 +1,15 @@
+Options -Indexes +FollowSymLinks
+DirectorySlash Off
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} ^(.+)/$
+RewriteRule ^(.+)/$ /$1 [R=301,L,QSA]
+
+RewriteCond %{REQUEST_URI} \.(css|js|jpe?g|png|gif|ico|svg|woff2?|ttf|eot|otf|webp|mp4|mp3|pdf|json)$ [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L,QSA]
