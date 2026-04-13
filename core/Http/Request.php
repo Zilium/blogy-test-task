@@ -76,8 +76,8 @@ class Request
         array $cookies,
         array $files
     ) {
-        $this->get = $this->sanitize($get);
-        $this->post = $this->sanitize($post);
+        $this->get = $get;
+        $this->post = $post;
         $this->server = $server;
         $this->cookies = $cookies;
         $this->files = $this->normalizeFiles($files);
@@ -114,36 +114,6 @@ class Request
     public function session(): Session
     {
         return $this->getSession();
-    }
-
-    /**
-     * Экранирует HTML-символы и очищает данные от XSS.
-     * 
-     * @param array $data Исходные данные.
-     * 
-     * @return array Очищенные данные.
-     */
-    private function sanitize(array $data): array
-    {
-        $sanitized = [];
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                $sanitized[$key] = $this->sanitize($value);
-            }
-            elseif (is_string($value)) {
-                // Не экранируем HTML-фрагмент, если ключ явно указан.
-                if ($key === 'html') {
-                    $sanitized[$key] = $value;
-                } else {
-                    $sanitized[$key] = htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-                }
-            }
-            else {
-                $sanitized[$key] = $value;
-            }
-        }
-
-        return $sanitized;
     }
 
     /**
@@ -342,17 +312,17 @@ class Request
         
         if (str_contains($contentType, 'multipart/form-data')) {
             parse_str($input, $data);
-            return $this->sanitize($data);
+            return $data;
         }
 
         if (str_contains($contentType, 'application/x-www-form-urlencoded')) {
             parse_str($input, $data);
-            return $this->sanitize($data);
+            return $data;
         }
 
         // Если Content-Type не указан, пробуем разобрать как URL-encoded
         parse_str($input, $data);
-        return $this->sanitize($data);
+        return $data;
     }
 
     /**
@@ -367,7 +337,7 @@ class Request
             if (json_last_error() !== JSON_ERROR_NONE) {
                 $this->jsonData = []; // Пустой массив при ошибке
             } else {
-                $this->jsonData = $this->sanitize($decoded); // Очищаем данные
+                $this->jsonData = $decoded;
             }
         }
     

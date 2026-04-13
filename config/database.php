@@ -7,10 +7,10 @@
 return [
     'connections' => [
         'mysql' => [
-            'host' => 'MySQL-8.4',
+            'host' => '',
             'port' => 3306,
-            'database' => 'project',
-            'username' => 'root',
+            'database' => '',
+            'username' => '',
             'password' => '',
             'charset' => 'utf8mb4',
             'collation' => '',
