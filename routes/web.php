@@ -7,12 +7,12 @@ Router::add('^/$', [
     'action' => 'index',
 ]);
 
-Router::add('^/category/(?P<id>.+)$', [
+Router::add('^/category/(?P<id>\d+)$', [
     'controller' => 'category',
     'action' => 'index',
 ]);
 
-Router::add('^/article/(?P<id>.+)$', [
+Router::add('^/article/(?P<id>\d+)$', [
     'controller' => 'article',
     'action' => 'index',
 ]);

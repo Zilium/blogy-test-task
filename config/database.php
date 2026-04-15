@@ -7,11 +7,11 @@
 return [
     'connections' => [
         'mysql' => [
-            'host' => '',
+            'host' => 'mysql',
             'port' => 3306,
-            'database' => '',
-            'username' => '',
-            'password' => '',
+            'database' => 'project',
+            'username' => 'app',
+            'password' => 'secret',
             'charset' => 'utf8mb4',
             'collation' => '',
             'prefix' => ''

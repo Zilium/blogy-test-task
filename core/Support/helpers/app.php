@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Core\Container;
 use Core\Kernel;
-use RuntimeException;
 
 if (!function_exists('app')) {
     /**
@@ -21,7 +20,7 @@ if (!function_exists('app')) {
      * @param string|null $abstract Класс или интерфейс, который нужно получить.
      * @return mixed|Container Возвращает экземпляр сервиса или сам контейнер.
      * 
-     * @throws RuntimeException Если Kernel ещё не инициализирован.
+     * @throws \RuntimeException Если Kernel ещё не инициализирован.
      */
     function app(?string $abstract = null): mixed {
         static $container = null;
@@ -30,7 +29,7 @@ if (!function_exists('app')) {
             global $kernel;
             
             if (!isset($kernel) || !$kernel instanceof Kernel) {
-                throw new RuntimeException(
+                throw new \RuntimeException(
                     'Ошибка: ядро приложения (Kernel) ещё не инициализировано. ' .
                     'Убедитесь, что $kernel создан до вызова функции app().'
                 );
@@ -44,7 +43,7 @@ if (!function_exists('app')) {
             try {
                 return $container->get($abstract);
             } catch (\Throwable $e) {
-                throw new RuntimeException(
+                throw new \RuntimeException(
                     "Ошибка: не удалось получить зависимость '{$abstract}' из контейнера. " .
                     "Подробности: " . $e->getMessage()
                 );
