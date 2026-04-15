@@ -1,6 +1,6 @@
 # Blogy Test Task
 
-Проект разработан на PHP 8.3 без использования фреймворков с использованием Smarty и MySQL.
+Проект выполнен на PHP 8.3 без использования фреймворков с использованием Smarty и MySQL.
 
 ## Функционал
 
@@ -34,14 +34,8 @@
 - Smarty
 - HTML
 - SCSS
-
-## Требования
-
-- PHP 8.3+
-- MySQL 8+
-- Composer
-- Веб-сервер Apache или Nginx
-
+- Docker
+  
 ## Установка
 
 ### 1. Клонирование репозитория
@@ -51,39 +45,29 @@ git clone https://github.com/Zilium/blogy-test-task.git
 cd blogy-test-task
 ```
 
-### 2. Установка зависимостей
-
+### 2. Запуск контейнеров
 ```bash
-composer install
+docker compose up -d --build
 ```
 
-### 3. Настройка базы данных
-
-config/database.php
-
-```php
-return [
-    'connections' => [
-        'mysql' => [
-            'host' => '',
-            'port' => 3306,
-            'database' => '',
-            'username' => '',
-            'password' => '',
-            'charset' => 'utf8mb4',
-            'collation' => '',
-            'prefix' => ''
-        ]
-    ]
-];
+### 3. Установка зависимостей
+```bash
+docker compose exec php composer install
 ```
 
-### 4. Выполнение миграций
+### 4. Выполнение миграций и заполнение тестовыми данными
+```bash
+docker compose exec php php cli.php fresh
+```
+
+После запуска проект доступен по адресу: http://localhost:8080
+
+### Другие команды
 
 ```bash
-php cli.php migrate   # создание таблиц
-php cli.php seed      # заполнение тестовыми данными
-php cli.php fresh     # пересоздание таблиц + заполнение данными
+docker compose exec php php cli.php migrate   # создание таблиц
+docker compose exec php php cli.php seed      # заполнение тестовыми данными
+docker compose exec php php cli.php fresh     # пересоздание таблиц + заполнение данными
 ```
 
 ### Структура проекта
