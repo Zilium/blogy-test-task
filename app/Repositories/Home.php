@@ -18,15 +18,15 @@ final class Home extends Repository
             SELECT
                 c.`id`,
                 c.`title`,
-                c.`description`,
-                COUNT(DISTINCT ac.`article_id`) AS `articles_count`
+                COUNT(ac.`article_id`) AS `articles_count`
             FROM `categories` AS c
                 INNER JOIN `article_category` AS ac 
                     ON ac.`category_id` = c.`id`
                 INNER JOIN `articles` AS a 
                     ON a.`id` = ac.`article_id`
             WHERE a.`published_at` IS NOT NULL
-            GROUP BY c.`id`, c.`title`, c.`title`
+                AND a.`published_at` <= NOW()
+            GROUP BY c.`id`
             ORDER BY c.`title` ASC
         ';
 
@@ -52,7 +52,9 @@ final class Home extends Repository
             FROM `articles` AS a
             INNER JOIN `article_category` AS ac 
                 ON ac.`article_id` = a.`id`
-            WHERE ac.`category_id` = ' . $this->db->quoteInt($categoryId) . '
+            WHERE ac.`category_id` = ' . $this->db->quoteInt($categoryId) . ' 
+                AND a.`published_at` IS NOT NULL 
+                AND a.`published_at` <= NOW()
             ORDER BY a.`published_at` DESC, a.`id` DESC
             LIMIT ' . $this->db->quoteInt($limit);
 

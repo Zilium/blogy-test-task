@@ -23,7 +23,7 @@ final class Category extends Repository
     }
 
     /**
-     * @param @int $categoryId
+     * @param int $categoryId
      * @param string $sort
      * 
      * @return string 
@@ -48,7 +48,8 @@ final class Category extends Repository
             INNER JOIN `article_category` AS ac
                 ON ac.`article_id` = a.`id`
             WHERE ac.`category_id` = ' . $this->db->quoteInt($categoryId) . '
-                AND a.`published_at` IS NOT NULL
+                AND a.`published_at` IS NOT NULL 
+                AND a.`published_at` <= NOW()
             ORDER BY ' . $orderBy;
     }
 }
